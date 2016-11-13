@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">MarkandEvanCE</string>
     <string name="passtext">Enter your Password:</string>
+    <string name="connectionString">149.61.165.155/vault.php</string>
 </resources>
