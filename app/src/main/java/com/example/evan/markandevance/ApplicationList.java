@@ -15,7 +15,7 @@ public class ApplicationList extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_application_list);
-        mainListView = (ListView) findViewById(R.id.android_R_id_list);
+        mainListView = (ListView) findViewById(R.id.listofapps);
         String [] accounts = new String[] {"Amazon", "Dropbox","Google"};
         ArrayList<String> websites = new ArrayList<String>();
         websites.addAll(Arrays.asList(accounts));
