@@ -1,12 +1,14 @@
 package com.example.evan.markandevance;
-
+import java.util.List;
+import org.json.JSONObject;
+import org.json.JSONException;
+import org.json.JSONArray;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.content.Context;
 import android.os.AsyncTask;
-
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
@@ -19,6 +21,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
+
 
 public class ApplicationList extends AppCompatActivity {
     private ListView mainListView;
