@@ -24,7 +24,7 @@ public class PasswordEntry extends AppCompatActivity {
       //  go to page
         objEdit = (EditText)findViewById(R.id.passEntry);
         String text = objEdit.getText().toString();
-        if (text.equals("test")) {
+        if (text.equals("test")) /* temp Password */ {
             Intent intent = new Intent(this, ApplicationList.class);
             startActivity(intent);
         }
