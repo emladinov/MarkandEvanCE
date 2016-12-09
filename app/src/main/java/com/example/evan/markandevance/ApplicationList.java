@@ -60,7 +60,8 @@ public class ApplicationList extends AppCompatActivity implements AdapterView.On
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
         Toast.makeText(this, "Item Clicked: " + position, Toast.LENGTH_SHORT).show();
-        new GetData().execute();
+        String params = (String)adapterView.getItemAtPosition(position);
+        new GetData("my arg", 10).execute(params);
     }
 
     private class GetSites extends AsyncTask <String[], Void, String[]>
@@ -119,16 +120,20 @@ public class ApplicationList extends AppCompatActivity implements AdapterView.On
         mainListView.setAdapter(adapter);
     }
     }
-    private class GetData extends AsyncTask <String[], Void, String[]>
+    private class GetData extends AsyncTask <String, Void, String[]>
     {
-        protected void onPreExecute(){
-            super.onPreExecute();
+        private String stringArg;
+        private int intArg;
+
+        public GetData(String stringArg, int intArg) {
+            this.stringArg = stringArg;
+            this.intArg = intArg;
         }
-        protected String[] doInBackground(String[]...params)
+        protected String[] doInBackground(String...strings)
         {
             //ArrayList<String> passwordlist = new ArrayList<String>();
             Uri.Builder builder = new Uri.Builder()
-                        .appendQueryParameter("site", "www.facebook.com");
+                        .appendQueryParameter("site", strings[0]);
             String input = builder.build().getEncodedQuery();
             try {
                 //String input = URLEncoder.encode("site", "UTF-8") + "=" + URLEncoder.encode("www.facebook.com", "UTF-8");
