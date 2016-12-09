@@ -11,10 +11,13 @@ import android.widget.Toast;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.Console;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
@@ -55,6 +58,7 @@ public class ApplicationList extends AppCompatActivity implements AdapterView.On
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
         Toast.makeText(this, "Item Clicked: " + position, Toast.LENGTH_SHORT).show();
+        new GetData().execute();
     }
 
     private class GetSites extends AsyncTask <String[], Void, String[]>
@@ -112,6 +116,68 @@ public class ApplicationList extends AppCompatActivity implements AdapterView.On
         adapter = new ArrayAdapter<String>(ApplicationList.this, R.layout.rowlayout, websites);
         mainListView.setAdapter(adapter);
     }
+    }
+    private class GetData extends AsyncTask <String[], Void, String[]>
+    {
+        protected void onPreExecute(){
+            super.onPreExecute();
+        }
+        protected String[] doInBackground(String[]...params)
+        {
+            try {
+                String input = "www.facebook.com";
+                URL url = new URL("http://149.61.165.155/vault_getData.php"); //where the data is coming from
+                HttpURLConnection connection = (HttpURLConnection) url.openConnection(); // set up connection
+                connection.setRequestMethod("POST"); //set mode to GET.
+                OutputStream os = connection.getOutputStream();
+                BufferedWriter author = new BufferedWriter(new OutputStreamWriter(os, "UTF-8"));
+                author.write(input);
+                author.flush();
+                author.close();
+                InputStream data = new BufferedInputStream(connection.getInputStream()); //set up input stream
+                BufferedReader reader = new BufferedReader(new InputStreamReader(data)); //buffer it
+                StringBuilder bdr = new StringBuilder();
+                System.out.println("Made it this far \n");
+                String dataStr = reader.readLine();
+                //JSONObject obj = new JSONObject();
+                JSONArray arr  = new JSONArray(dataStr); //set up JSON array decoder
+                //String [] stuff = new String[arr.length()];
+                List<String> stuff = new ArrayList<String>();
+                for(int count = 0; count < arr.length(); count++)
+                {
+                    //JSONObject temp = new JSONObject(dataStr);
+                    stuff.add(arr.getString(count));
+                    //System.out.println(stuff[count]);
+                }
+                String [] output = stuff.toArray(new String[stuff.size()]); //our array
+                return output;
+                //while((str = reader.readLine()) != null) //feed data into string builder
+                //{
+                // bdr.append(str); // get that into my array
+                //outputStr = str.toString();
+                //}help
+            }
+            catch(MalformedURLException e)
+            {
+                System.out.println(e);
+            }
+            catch(IOException e)
+            {
+                System.out.println(e);
+            }
+            catch(JSONException e)
+            {
+                System.out.println(e);
+            }
+            return null;
+        }
+        protected void onPostExecute(String[] params){
+            super.onPostExecute(params);
+            ArrayList<String> websites = new ArrayList<String>(); //fill
+            websites.addAll(Arrays.asList(params));
+            adapter = new ArrayAdapter<String>(ApplicationList.this, R.layout.rowlayout, websites);
+            mainListView.setAdapter(adapter);
+        }
     }
 }
 
