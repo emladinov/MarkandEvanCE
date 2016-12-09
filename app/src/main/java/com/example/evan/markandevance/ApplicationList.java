@@ -46,6 +46,7 @@ public class ApplicationList extends AppCompatActivity {
         websites.addAll(Arrays.asList(accounts));
         adapter = new ArrayAdapter<String>(this, R.layout.rowlayout, websites);
         mainListView.setAdapter(adapter); */
+        //
         listofapps.setOnItemClickListener (new OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position,
