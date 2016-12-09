@@ -89,7 +89,7 @@ public class ApplicationList extends AppCompatActivity implements AdapterView.On
                 //{
                 // bdr.append(str); // get that into my array
                 //outputStr = str.toString();
-                //}
+                //}help
             }
             catch(MalformedURLException e)
             {
