@@ -14,6 +14,7 @@ public class ShowData extends AppCompatActivity {
         Intent intent = getIntent();
         String userName = intent.getStringExtra("un");
         String password = intent.getStringExtra("pw");
+        //pull username and password from intent
         TextView userText = (TextView) findViewById(R.id.textView3);
         TextView passText = (TextView) findViewById(R.id.textView2);
         userText.setText(userName);

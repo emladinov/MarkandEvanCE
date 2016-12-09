@@ -38,7 +38,7 @@ public class addAcc extends AppCompatActivity {
         String PW = password.getText().toString(); //Password input
         website = (EditText)findViewById(R.id.WebIn);
         String WEB = website.getText().toString(); //Website input
-        TestParam params = new TestParam(UN,PW,WEB); //create TestParam object to store the
+        TestParam params = new TestParam(UN,PW,WEB); //create TestParam object to pass to addData
         new addData("arg", 3).execute(params);
     }
     private class addData extends AsyncTask<TestParam, Void, String> //takes TestParam as an input
