@@ -3,8 +3,11 @@ package com.example.evan.markandevance;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
@@ -26,7 +29,7 @@ import java.net.URLStreamHandler;
 import java.util.List;
 
 
-public class ApplicationList extends AppCompatActivity {
+public class ApplicationList extends AppCompatActivity implements AdapterView.OnItemClickListener{
     private ListView mainListView;
     ArrayAdapter<String> adapter;
     @Override
@@ -40,12 +43,18 @@ public class ApplicationList extends AppCompatActivity {
         adapter = new ArrayAdapter<String>(this, R.layout.rowlayout, websites);
         mainListView.setAdapter(adapter); */
         //this is to make this master
+        mainListView.setOnItemClickListener(this);
     }
     private void fetchStr()
     {
         //String [] outputStr = {"nothing"};
         new GetSites().execute();
         //return outputStr; //return that
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+        Toast.makeText(this, "Item Clicked: " + position, Toast.LENGTH_SHORT).show();
     }
 
     private class GetSites extends AsyncTask <String[], Void, String[]>
