@@ -60,8 +60,15 @@ public class ApplicationList extends AppCompatActivity implements AdapterView.On
 
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
-        Toast.makeText(this, "Item Clicked: " + position, Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this, "Item Clicked: " + position, Toast.LENGTH_SHORT).show(); debug
         String params = (String)adapterView.getItemAtPosition(position);
+        if(params == "Add an account")
+        {
+            Toast.makeText(this, "Add an account", Toast.LENGTH_SHORT).show();
+            Intent i = new Intent(getApplicationContext(), addAcc.class);
+            startActivity(i);
+        }
+        else
         new GetData("my arg", 10).execute(params);
     }
 
@@ -117,6 +124,7 @@ public class ApplicationList extends AppCompatActivity implements AdapterView.On
         super.onPostExecute(params);
         ArrayList<String> websites = new ArrayList<String>(); //fill
         websites.addAll(Arrays.asList(params));
+        websites.add("Add an account");
         adapter = new ArrayAdapter<String>(ApplicationList.this, R.layout.rowlayout, websites);
         mainListView.setAdapter(adapter);
     }

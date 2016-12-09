@@ -19,6 +19,7 @@
         </activity>
         <activity android:name=".ApplicationList" />
         <activity android:name=".ShowData"></activity>
+        <activity android:name=".addAcc"></activity>
     </application>
 
 </manifest>
