@@ -39,6 +39,7 @@ public class ApplicationList extends AppCompatActivity {
         websites.addAll(Arrays.asList(accounts));
         adapter = new ArrayAdapter<String>(this, R.layout.rowlayout, websites);
         mainListView.setAdapter(adapter); */
+        //this is to make this master again
     }
     private void fetchStr()
     {
