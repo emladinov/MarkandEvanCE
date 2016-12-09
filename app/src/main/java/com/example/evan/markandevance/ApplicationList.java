@@ -10,11 +10,9 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
-
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
-import java.io.Console;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -22,16 +20,11 @@ import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.net.URLConnection;
-import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.Arrays;
-//import org.apache.http.*;
 import org.json.JSONArray;
 import org.json.JSONException;
-import org.json.JSONObject;
 import java.net.HttpURLConnection;
-import java.net.URLStreamHandler;
 import java.util.List;
 
 
@@ -43,19 +36,8 @@ public class ApplicationList extends AppCompatActivity implements AdapterView.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_application_list);
         mainListView = (ListView) findViewById(R.id.listofApps);
-        fetchStr(); //fetch websites from database
-       /* ArrayList<String> websites = new ArrayList<String>(); //fill
-        websites.addAll(Arrays.asList(accounts));
-        adapter = new ArrayAdapter<String>(this, R.layout.rowlayout, websites);
-        mainListView.setAdapter(adapter); */
-        //this is to make this master
+        new GetSites().execute(); //fetch websites from database
         mainListView.setOnItemClickListener(this);
-    }
-    private void fetchStr()
-    {
-        //String [] outputStr = {"nothing"};
-        new GetSites().execute();
-        //return outputStr; //return that
     }
 
     @Override
@@ -88,23 +70,13 @@ public class ApplicationList extends AppCompatActivity implements AdapterView.On
                 StringBuilder bdr = new StringBuilder();
                 System.out.println("Made it this far \n");
                 String dataStr = reader.readLine();
-                //JSONObject obj = new JSONObject();
                 JSONArray arr  = new JSONArray(dataStr); //set up JSON array decoder
-                //String [] stuff = new String[arr.length()];
                 List<String> stuff = new ArrayList<String>();
                 for(int count = 0; count < arr.length(); count++)
                 {
-                    //JSONObject temp = new JSONObject(dataStr);
                     stuff.add(arr.getString(count));
-                    //System.out.println(stuff[count]);
                 }
-                    String [] output = stuff.toArray(new String[stuff.size()]); //our array
-                    return output;
-                //while((str = reader.readLine()) != null) //feed data into string builder
-                //{
-                // bdr.append(str); // get that into my array
-                //outputStr = str.toString();
-                //}help
+                    return stuff.toArray(new String[stuff.size()]); //our array
             }
             catch(MalformedURLException e)
             {
@@ -140,12 +112,10 @@ public class ApplicationList extends AppCompatActivity implements AdapterView.On
         }
         protected String[] doInBackground(String...strings)
         {
-            //ArrayList<String> passwordlist = new ArrayList<String>();
             Uri.Builder builder = new Uri.Builder()
                         .appendQueryParameter("site", strings[0]);
             String input = builder.build().getEncodedQuery();
             try {
-                //String input = URLEncoder.encode("site", "UTF-8") + "=" + URLEncoder.encode("www.facebook.com", "UTF-8");
                 URL url = new URL("http://149.61.165.155/vault_getData.php?"); //where the data is coming from
                 HttpURLConnection connection = (HttpURLConnection) url.openConnection(); // set up connection
                 connection.setRequestMethod("POST"); //set mode to POST.
@@ -161,23 +131,13 @@ public class ApplicationList extends AppCompatActivity implements AdapterView.On
                 StringBuilder bdr = new StringBuilder();
                 System.out.println("Made it this far \n");
                 String dataStr = reader.readLine();
-                //JSONObject obj = new JSONObject();
                 JSONArray arr  = new JSONArray(dataStr); //set up JSON array decoder
-                //String [] stuff = new String[arr.length()];
                 List<String> stuff = new ArrayList<String>();
                 for(int count = 0; count < arr.length(); count++)
                 {
-                    //JSONObject temp = new JSONObject(dataStr);
                     stuff.add(arr.getString(count));
-                    //System.out.println(stuff[count]);
                 }
-                String [] output = stuff.toArray(new String[stuff.size()]); //our array
-                return output;
-                //while((str = reader.readLine()) != null) //feed data into string builder
-                //{
-                // bdr.append(str); // get that into my array
-                //outputStr = str.toString();
-                //}help
+                return stuff.toArray(new String[stuff.size()]); //our array
             }
             catch(MalformedURLException e)
             {
