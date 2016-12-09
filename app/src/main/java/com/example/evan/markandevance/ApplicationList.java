@@ -1,8 +1,12 @@
 package com.example.evan.markandevance;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
@@ -24,6 +28,9 @@ import org.json.JSONObject;
 import java.net.HttpURLConnection;
 import java.net.URLStreamHandler;
 import java.util.List;
+import Ada
+
+import static com.example.evan.markandevance.R.id.listofapps;
 
 
 public class ApplicationList extends AppCompatActivity {
@@ -33,12 +40,21 @@ public class ApplicationList extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_application_list);
-        mainListView = (ListView) findViewById(R.id.listofApps);
+        mainListView = (ListView) findViewById(listofapps);
         fetchStr(); //fetch websites from database
        /* ArrayList<String> websites = new ArrayList<String>(); //fill
         websites.addAll(Arrays.asList(accounts));
         adapter = new ArrayAdapter<String>(this, R.layout.rowlayout, websites);
         mainListView.setAdapter(adapter); */
+        listofapps.setOnItemClickListener (new OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position,
+                                    long id) {
+                Intent intent = new Intent(ApplicationList.this, accountdata.class);
+
+                startActivity(intent);
+            }
+        });
     }
     private void fetchStr()
     {
@@ -103,5 +119,6 @@ public class ApplicationList extends AppCompatActivity {
         mainListView.setAdapter(adapter);
     }
     }
+
 }
 
