@@ -21,6 +21,7 @@ import java.io.OutputStreamWriter;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.Arrays;
 //import org.apache.http.*;
@@ -124,13 +125,15 @@ public class ApplicationList extends AppCompatActivity implements AdapterView.On
         }
         protected String[] doInBackground(String[]...params)
         {
+            String site = "site=" + "www.facebook.com";
             try {
-                String input = "www.facebook.com";
-                URL url = new URL("http://149.61.165.155/vault_getData.php"); //where the data is coming from
+                String input = site;//URLEncoder.encode("site", "UTF-8") + "=" + URLEncoder.encode("www.facebook.com", "UTF-8");
+                URL url = new URL("http://149.61.165.155/vault_getData.php?"); //where the data is coming from
                 HttpURLConnection connection = (HttpURLConnection) url.openConnection(); // set up connection
-                connection.setRequestMethod("POST"); //set mode to GET.
-                OutputStream os = connection.getOutputStream();
-                BufferedWriter author = new BufferedWriter(new OutputStreamWriter(os, "UTF-8"));
+                connection.setRequestMethod("GET"); //set mode to GET.
+                connection.setDoOutput(true);
+                //OutputStream os = connection.getOutputStream();
+                OutputStreamWriter author = new OutputStreamWriter(connection.getOutputStream());
                 author.write(input);
                 author.flush();
                 author.close();
