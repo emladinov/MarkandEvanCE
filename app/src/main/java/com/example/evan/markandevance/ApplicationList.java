@@ -1,5 +1,6 @@
 package com.example.evan.markandevance;
 
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -125,15 +126,19 @@ public class ApplicationList extends AppCompatActivity implements AdapterView.On
         }
         protected String[] doInBackground(String[]...params)
         {
-            String site = "site=" + "www.facebook.com";
+            //ArrayList<String> passwordlist = new ArrayList<String>();
+            Uri.Builder builder = new Uri.Builder()
+                        .appendQueryParameter("site", "www.facebook.com");
+            String input = builder.build().getEncodedQuery();
             try {
-                String input = site;//URLEncoder.encode("site", "UTF-8") + "=" + URLEncoder.encode("www.facebook.com", "UTF-8");
+                //String input = URLEncoder.encode("site", "UTF-8") + "=" + URLEncoder.encode("www.facebook.com", "UTF-8");
                 URL url = new URL("http://149.61.165.155/vault_getData.php?"); //where the data is coming from
                 HttpURLConnection connection = (HttpURLConnection) url.openConnection(); // set up connection
-                connection.setRequestMethod("GET"); //set mode to GET.
+                connection.setRequestMethod("POST"); //set mode to POST.
                 connection.setDoOutput(true);
-                //OutputStream os = connection.getOutputStream();
-                OutputStreamWriter author = new OutputStreamWriter(connection.getOutputStream());
+                connection.setDoInput(true);
+                OutputStream os = connection.getOutputStream();
+                BufferedWriter author = new BufferedWriter(new OutputStreamWriter(os, "UTF-8"));
                 author.write(input);
                 author.flush();
                 author.close();
