@@ -1,5 +1,6 @@
 package com.example.evan.markandevance;
 
+import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
@@ -186,10 +187,12 @@ public class ApplicationList extends AppCompatActivity implements AdapterView.On
         }
         protected void onPostExecute(String[] params){
             super.onPostExecute(params);
-            ArrayList<String> websites = new ArrayList<String>(); //fill
-            websites.addAll(Arrays.asList(params));
-            adapter = new ArrayAdapter<String>(ApplicationList.this, R.layout.rowlayout, websites);
-            mainListView.setAdapter(adapter);
+            String userName = params[0];
+            String password = params[1];
+            Intent i = new Intent(getApplicationContext(), ShowData.class);
+            i.putExtra("un", userName);
+            i.putExtra("pw", password);
+            startActivity(i);
         }
     }
 }
