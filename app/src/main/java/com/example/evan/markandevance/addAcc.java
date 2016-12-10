@@ -37,23 +37,16 @@ public class addAcc extends AppCompatActivity {
         website = (EditText)findViewById(R.id.WebIn);
         String WEB = website.getText().toString(); //Website input
         AccInfo params = new AccInfo(UN,PW,WEB); //create AccInfo object to pass to addData
-        new addData("arg", 3).execute(params);
+        new addData().execute(params);
     }
     private class addData extends AsyncTask<AccInfo, Void, String> //takes AccInfo as an input
     {
-        private String stringArg;
-        private int intArg;
-
-        public addData(String stringArg, int intArg) {
-            this.stringArg = stringArg;
-            this.intArg = intArg;
-        }
         protected String doInBackground(AccInfo...AccInfos) { //add record to DB
             Uri.Builder builder = new Uri.Builder();
             builder.appendQueryParameter("site", AccInfos[0].WEB);
             builder.appendQueryParameter("usr", AccInfos[0].UN);
             builder.appendQueryParameter("pwd", AccInfos[0].PW);
-
+            //set up the query using username, website, and password from AccInfo input object
             String input = builder.build().getEncodedQuery();
             try {
                 URL url = new URL("http://149.61.165.155/vault_addToDB.php?"); //where the data is coming from
