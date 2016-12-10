@@ -133,7 +133,7 @@ public class ApplicationList extends AppCompatActivity implements AdapterView.On
                 //set up output stream for writing the request
                 author.write(input); //send request to the server (equivalent to running the php doc in a browser)
                 author.flush();     //example: http://149.61.165.155/vault_getData.php?site=www.facebook.com
-                author.close();     //'site' is the input parameterto the php page that we use to run the query, set to "www.facebook.com" in the above URL
+                author.close();     //'site' is the input parameter to the php page that we use to run the query, set to "www.facebook.com" in the above URL
                 InputStream data = new BufferedInputStream(connection.getInputStream()); //set up input stream
                 BufferedReader reader = new BufferedReader(new InputStreamReader(data)); //buffer it
                 String dataStr = reader.readLine(); //pull page output into a string
