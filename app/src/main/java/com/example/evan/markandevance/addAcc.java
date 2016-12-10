@@ -38,10 +38,10 @@ public class addAcc extends AppCompatActivity {
         String PW = password.getText().toString(); //Password input
         website = (EditText)findViewById(R.id.WebIn);
         String WEB = website.getText().toString(); //Website input
-        TestParam params = new TestParam(UN,PW,WEB); //create TestParam object to pass to addData
+        AccInfo params = new AccInfo(UN,PW,WEB); //create AccInfo object to pass to addData
         new addData("arg", 3).execute(params);
     }
-    private class addData extends AsyncTask<TestParam, Void, String> //takes TestParam as an input
+    private class addData extends AsyncTask<AccInfo, Void, String> //takes AccInfo as an input
     {
         private String stringArg;
         private int intArg;
@@ -50,11 +50,11 @@ public class addAcc extends AppCompatActivity {
             this.stringArg = stringArg;
             this.intArg = intArg;
         }
-        protected String doInBackground(TestParam...TestParams) { //add record to DB
+        protected String doInBackground(AccInfo...AccInfos) { //add record to DB
             Uri.Builder builder = new Uri.Builder();
-            builder.appendQueryParameter("site", TestParams[0].WEB);
-            builder.appendQueryParameter("usr", TestParams[0].UN);
-            builder.appendQueryParameter("pwd", TestParams[0].PW);
+            builder.appendQueryParameter("site", AccInfos[0].WEB);
+            builder.appendQueryParameter("usr", AccInfos[0].UN);
+            builder.appendQueryParameter("pwd", AccInfos[0].PW);
 
             String input = builder.build().getEncodedQuery();
             try {
@@ -69,9 +69,8 @@ public class addAcc extends AppCompatActivity {
                 author.flush();
                 author.close();
                 InputStream data = new BufferedInputStream(connection.getInputStream()); //set up input stream
-                BufferedReader reader = new BufferedReader(new InputStreamReader(data)); //buffer it
-                StringBuilder bdr = new StringBuilder();
-                System.out.println("Made it this far \n");
+                //^needed for the outgoing request to work, for some reason^
+                //My guess is that this 'runs' the php script, running our query
                 return "";
             }
             catch(MalformedURLException e)
@@ -91,14 +90,14 @@ public class addAcc extends AppCompatActivity {
             startActivity(i);
         }
     }
-    private static class TestParam //Used to group strings together into one object
+    private static class AccInfo //Used to group strings together into one object
         //(as opposed to passing an arrray in, as that seems like it would get messy)
     {
         String UN; //User name as a string
         String PW; //Password as a string
         String WEB; //website URL as a string
 
-        TestParam(String username, String password, String website) { //constructor
+        AccInfo(String username, String password, String website) { //constructor
             this.UN = username;
             this.PW = password;
             this.WEB = website;
