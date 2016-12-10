@@ -54,7 +54,7 @@ public class ApplicationList extends AppCompatActivity implements AdapterView.On
             startActivity(i);
         }
         else
-        new GetData("my arg", 10).execute(params);
+        new GetData().execute(params);
     }
 
     private class GetSites extends AsyncTask <String[], Void, String[]> //Background thread
@@ -107,13 +107,6 @@ public class ApplicationList extends AppCompatActivity implements AdapterView.On
     private class GetData extends AsyncTask <String, Void, String[]> //Background thread
             // used to get the username and password for a particular website
     {
-        private String stringArg;
-        private int intArg;
-
-        public GetData(String stringArg, int intArg) { //constructor
-            this.stringArg = stringArg;
-            this.intArg = intArg;
-        }
         protected String[] doInBackground(String...strings) //pass in a string parameter
         {
             Uri.Builder builder = new Uri.Builder()//Uri.Builder used to generate request statement
