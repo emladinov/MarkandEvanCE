@@ -62,6 +62,7 @@ public class addAcc extends AppCompatActivity {
                 InputStream data = new BufferedInputStream(connection.getInputStream()); //set up input stream
                 //^needed for the outgoing request to work, for some reason^
                 //My guess is that this 'runs' the php script, running our query
+                //same as before
                 return "";
             }
             catch(MalformedURLException e)
