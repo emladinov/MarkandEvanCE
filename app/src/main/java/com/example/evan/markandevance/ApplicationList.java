@@ -44,7 +44,7 @@ public class ApplicationList extends AppCompatActivity implements AdapterView.On
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
         //Toast.makeText(this, "Item Clicked: " + position, Toast.LENGTH_SHORT).show(); debug
-        String params = (String)adapterView.getItemAtPosition(position);
+        String params = (String)adapterView.getItemAtPosition(position); //pull string out of item clicked
         if(params == "Add an account")
         {
             //display message

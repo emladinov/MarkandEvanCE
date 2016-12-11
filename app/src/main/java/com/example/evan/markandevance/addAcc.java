@@ -83,7 +83,7 @@ public class addAcc extends AppCompatActivity {
         }
     }
     private static class AccInfo //Used to group strings together into one object
-        //(as opposed to passing an arrray in, as that seems like it would get messy)
+        //(as opposed to passing an array in, as that seems like it would get messy)
     {
         String UN; //User name as a string
         String PW; //Password as a string
