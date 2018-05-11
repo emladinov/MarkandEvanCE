@@ -21,10 +21,9 @@
             </intent-filter>
         </activity>
         <activity android:name=".ApplicationList" />
-        <activity
-            android:name=".accountdata"
-            android:label="@string/title_activity_accountdata"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity android:name=".ShowData"></activity>
+        <activity android:name=".addAcc"></activity>
+
     </application>
 
 </manifest>
