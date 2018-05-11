@@ -28,7 +28,6 @@ import org.json.JSONObject;
 import java.net.HttpURLConnection;
 import java.net.URLStreamHandler;
 import java.util.List;
-import Ada
 
 import static com.example.evan.markandevance.R.id.listofapps;
 
