@@ -2,6 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.evan.markandevance">
 
+    <uses-permissions android:name="android.permission.INTERNET" />
+
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
@@ -20,6 +23,7 @@
         <activity android:name=".ApplicationList" />
         <activity android:name=".ShowData"></activity>
         <activity android:name=".addAcc"></activity>
+
     </application>
 
 </manifest>

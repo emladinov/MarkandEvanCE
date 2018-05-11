@@ -1,5 +1,6 @@
 package com.example.evan.markandevance;
 
+
 import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -26,6 +27,9 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import java.net.HttpURLConnection;
 import java.util.List;
+import Ada
+
+import static com.example.evan.markandevance.R.id.listofapps;
 
 
 public class ApplicationList extends AppCompatActivity implements AdapterView.OnItemClickListener{
@@ -39,6 +43,7 @@ public class ApplicationList extends AppCompatActivity implements AdapterView.On
         //set list of applications to
         new GetSites().execute(); //fetch websites from database
         mainListView.setOnItemClickListener(this);
+
     }
 
     @Override
@@ -165,5 +170,6 @@ public class ApplicationList extends AppCompatActivity implements AdapterView.On
             startActivity(i);
         }
     }
+
 }
 
